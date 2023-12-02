@@ -8,7 +8,6 @@ from CNN import CNNModel  # Import CNNModel from CNN.py
 from RNN import RNNModel  # Import RNNModel from RNN.py
 
 def load_data(file_path):
-    # Load the dataset
     data = pd.read_csv(file_path)
     return data
 
@@ -58,12 +57,16 @@ def main():
      # Train and evaluate CNN model
     cnn_model = CNNModel()
     cnn_model.train(X_train, y_train, X_val, y_val)
-    cnn_model.evaluate(X_test, y_test)
+    cnn_accuracy=cnn_model.evaluate(X_test, y_test)
 
     # Train and evaluate RNN model
     rnn_model = RNNModel()
     rnn_model.train(X_train, y_train, X_val, y_val)
-    rnn_model.evaluate(X_test, y_test)
+    rnn_accuracy = rnn_model.evaluate(X_test, y_test)
 
+    # COMPARE HERE 
+    print("\nComparison of CNN and RNN models:")
+    print(f"CNN Validation Accuracy: {cnn_accuracy * 100:.2f}%")
+    print(f"RNN Validation Accuracy: {rnn_accuracy * 100:.2f}%")
 if __name__ == "__main__":
     main()
