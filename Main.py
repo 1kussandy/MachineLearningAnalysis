@@ -7,17 +7,19 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from CNN import CNNModel  # Import CNNModel from CNN.py
 from RNN import RNNModel  # Import RNNModel from RNN.py
 
+# Extracts Data from CSV to program
 def load_data(file_path):
     data = pd.read_csv(file_path)
     return data
 
+# Extracts Columns by label
 def preprocess_data(data):
     data['clean_text'] = data['clean_text'].str.replace('[^a-zA-Z\s]', '').str.lower()
     valid_labels = [-1, 0, 1]  
     data = data[data['category'].isin(valid_labels)]
     return data
 
-
+# Cleans and Tokenizes Data to numerical values 
 def prepare_data(data):
     data['clean_text'].fillna('', inplace=True)
     label_encoder = LabelEncoder()
@@ -31,6 +33,7 @@ def prepare_data(data):
 
     return X_padded, data['category'], max_sequence_length
 
+# Splits Data Set into Train Test And Validate Sets
 def split_dataset(X, y, test_size=0.2, validation_size=0.25):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=validation_size, random_state=42)
@@ -43,7 +46,7 @@ def split_dataset(X, y, test_size=0.2, validation_size=0.25):
 
 
 def main():
-    file_path = 'Twitter_Data 2.csv' 
+    file_path = 'Twitter_Data.csv' 
     data = load_data(file_path)
     data = preprocess_data(data)
     X, y, max_sequence_length = prepare_data(data)
