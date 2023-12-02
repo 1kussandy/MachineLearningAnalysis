@@ -7,7 +7,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense, SpatialDropout1D
 from tensorflow.keras.callbacks import EarlyStopping
 
 class RNNModel:
-    def __init__(self, max_sequence_length=35, max_words=10000, embedding_dim=100):
+    def __init__(self, max_sequence_length=49, max_words=10000, embedding_dim=100):
         self.max_sequence_length = max_sequence_length
         self.max_words = max_words
         self.embedding_dim = embedding_dim

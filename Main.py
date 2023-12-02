@@ -14,28 +14,36 @@ def load_data(file_path):
 
 def preprocess_data(data):
     # Clean text data: Remove special characters and lowercase text
-    data['text'] = data['text'].str.replace('[^a-zA-Z\s]', '').str.lower()
+    data['clean_text'] = data['clean_text'].str.replace('[^a-zA-Z\s]', '').str.lower()
+    
+    # Check for labels outside the range [-1, 0, 1]
+    valid_labels = [-1, 0, 1]  # Adjust this list based on your labels
+    
+    # Remove rows where the 'category' column has a value outside the valid range
+    data = data[data['category'].isin(valid_labels)]
+    
     return data
+
 
 # ... (other code remains the same)
 
 def prepare_data(data):
     # Fill NaN values in 'text' column with empty strings
-    data['text'].fillna('', inplace=True)
+    data['clean_text'].fillna('', inplace=True)
 
     # Encode sentiment labels to numerical values
     label_encoder = LabelEncoder()
-    data['sentiment'] = label_encoder.fit_transform(data['sentiment'])
+    data['category'] = label_encoder.fit_transform(data['category'])
 
     # Convert text data into numerical representations using Tokenizer
     tokenizer = Tokenizer(num_words=10000)  # Limit vocabulary size to 10000 words
 
-    tokenizer.fit_on_texts(data['text'].astype(str))  # Ensure data is treated as strings
-    sequences = tokenizer.texts_to_sequences(data['text'].astype(str))  # Convert to strings for tokenization
+    tokenizer.fit_on_texts(data['clean_text'].astype(str))  # Ensure data is treated as strings
+    sequences = tokenizer.texts_to_sequences(data['clean_text'].astype(str))  # Convert to strings for tokenization
     max_sequence_length = max([len(seq) for seq in sequences])
     X_padded = pad_sequences(sequences, maxlen=max_sequence_length)
 
-    return X_padded, data['sentiment'], max_sequence_length
+    return X_padded, data['category'], max_sequence_length
 
 # ... (rest of the code remains the same)
 
@@ -54,7 +62,7 @@ def split_dataset(X, y, test_size=0.2, validation_size=0.25):
 
 def main():
     # Load the dataset
-    file_path = 'tweets.csv'  # Update with your dataset file path
+    file_path = 'Twitter_Data 2.csv'  # Update with your dataset file path
     data = load_data(file_path)
 
     # Data Preprocessing
