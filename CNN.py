@@ -16,7 +16,7 @@ class CNNModel:
         model.add(GlobalMaxPooling1D())
         model.add(Dense(64, activation='relu'))
         model.add(Dropout(0.5))
-        model.add(Dense(3, activation='softmax'))  # 3 classes: negative, neutral, positive
+        model.add(Dense(3, activation='softmax'))
 
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         return model
@@ -27,7 +27,6 @@ class CNNModel:
         history = self.model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,
                                  validation_data=(X_val, y_val), callbacks=[early_stopping])
         
-        # Evaluate model on test set and print accuracy
         _, accuracy = self.model.evaluate(X_val, y_val)
         print(f"CNN Validation Accuracy: {accuracy}")
         print(f"CNN Validation Accuracy: {accuracy * 100:.2f}%")

@@ -14,7 +14,7 @@ class RNNModel:
         model.add(Embedding(self.max_words, self.embedding_dim, input_length=self.max_sequence_length))
         model.add(SpatialDropout1D(0.2))
         model.add(LSTM(100, dropout=0.2, recurrent_dropout=0.2))
-        model.add(Dense(3, activation='softmax'))  # 3 classes: negative, neutral, positive
+        model.add(Dense(3, activation='softmax'))
 
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         return model
@@ -25,7 +25,6 @@ class RNNModel:
         history = self.model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,
                                  validation_data=(X_val, y_val), callbacks=[early_stopping])
         
-        # Evaluate model on validation set and print accuracy
         _, accuracy = self.model.evaluate(X_val, y_val)
         print(f"RNN Validation Accuracy: {accuracy}")
         print(f"RNN Validation Accuracy: {accuracy * 100:.2f}%")
