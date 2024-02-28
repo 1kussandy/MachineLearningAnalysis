@@ -1,4 +1,6 @@
-Step-by-Step Guide to Installing and Using the Sentiment Analysis Model
+#Step-by-Step Guide to Installing and Using the Sentiment Analysis Model
+
+
 Install Python: Begin by installing Python, the programming language required to run the sentiment analysis model. You can download Python from the official website: Python Downloads.
 
 Install Git: Next, ensure you have Git installed on your system. Git is necessary for cloning the repository containing the sentiment analysis model. You can download Git from the official website: Git Downloads.
