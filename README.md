@@ -1,17 +1,41 @@
-Task and Dataset preprocessing
-We retrieved our dataset from kaggleDataset. The dataset was structured by two columns: Clean_comment and Category. The Category column was restricted to three of the following values; [-1(negative) ,0 (neutral), 1(positive)].
-This is the column we will predict on so we extracted it for the training data. Clean_comment is the string value that corresponds to Category. This is the comment we need to extract to train the model. Thus we extracted it and later prepared it to be used correctly when training the model. After unzipping data to our current file, we cleaned the data to remove special characters. To prepare the data we filled any null spaces with an empty string and encoded our text data and sentiment labels to numerical representations using a Tokenizer. Once all data was converted to numerical values, we could split the data into sets; train and test.
-Implementation and architectures
-CNN:
-We implemented our Convolutional Neural Network (CNN) using the TensorFlow and Keras frameworks. The implementation is encapsulated within the CNNModel class, providing a structured and modular approach to building and training the model.
-   
- The architecture, encapsulated within the CNNModel class, encompasses key components such as an embedding layer for vectorizing words, a 1D convolutional layer with ReLU activation, global max-pooling for feature extraction, and dense layers facilitating sentiment classification into negative, neutral, and positive categories. The model is trained with categorical cross entropy loss, Adam optimizer, and employs early stopping to prevent overfitting during the training process. This CNN architecture is tailored to capture hierarchical features in text data, particularly for sentiment analysis.
-RNN:
-The model architecture begins with an embedding layer, mapping words to vectors, followed by a SpatialDropout1D layer to introduce dropout in the embedding space. The core of the model is an LSTM (Long Short-Term Memory) layer with 100 units, incorporating dropout and recurrent dropout for regularization. The final layer is a dense layer with softmax activation, indicating the model's classification into three sentiment classes: negative, neutral, and positive. During training, early stopping is implemented to monitor the validation loss, and training is halted if improvement ceases, restoring the best weights.
-Training Details
-The dataset is loaded from a CSV file and preprocessed by cleaning the text data and filtering relevant sentiment labels. The preprocessing steps include transforming text data into sequences of numerical values and encoding the sentiment labels. The dataset is then split into training, validation, and test sets using the train_test_split function from scikit-learn. The training set comprises the majority of the data, with the validation set used for monitoring the model's performance during training and early stopping to prevent overfitting. The test set remains unseen during training and serves as an independent evaluation set to assess the model's generalization to new data. We split our data so that we had 97783 training samples to 32595 test and validation samples. This provided a larger test case to train the model on so that our accuracy would be increased after.
-Results and Observations
+here are the steps to install and use the sentiment analysis model hosted on GitHub:
 
-The CNN model exhibits a strong training performance, reaching a training accuracy of 98.91% after five epochs, while the validation accuracy stabilizes at 95.75%. The test accuracy is consistent with the validation accuracy at 95.69%, showcasing the model's generalization to unseen data.
-On the other hand, the RNN model demonstrates a comparable training accuracy of 98.18% after five epochs, with a slightly higher validation accuracy of 96.79%. The test accuracy is consistent with the validation accuracy at 96.85%. The RNN model seems to capture sequential dependencies effectively, leading to a slightly higher validation and test accuracy compared to the CNN model.
-In conclusion, both models exhibit strong performance in sentiment analysis, with the RNN model marginally outperforming the CNN model in terms of validation and test accuracy. The choice between these models may depend on specific use cases and preferences, considering factors such as computational resources and interpretability.
+Install Python: If you haven't already, install Python on your system. You can download Python from the official website: Python Downloads.
+
+Install Git: If you haven't already, install Git on your system. You can download Git from the official website: Git Downloads.
+
+Clone the Repository: Open a terminal or command prompt and clone the GitHub repository containing the sentiment analysis model. Use the following command:
+
+bash
+Copy code
+git clone <repository_url>
+Replace <repository_url> with the URL of the GitHub repository.
+
+Navigate to the Repository: Change your current directory to the cloned repository's directory. Use the cd command:
+
+bash
+Copy code
+cd <repository_directory>
+Replace <repository_directory> with the directory where you cloned the repository.
+
+Install Dependencies: Install the required Python dependencies. You can use pip for this:
+
+bash
+Copy code
+pip install -r requirements.txt
+Run the Application: Run the application. Depending on how the application is structured, there might be different ways to run it. Look for instructions in the repository's documentation or README file. Typically, you might run a Python script:
+
+bash
+Copy code
+python app.py
+Replace app.py with the main Python script if it's named differently.
+
+Access the Application: Once the application is running, access it through a web browser or a local host address provided by the application. Again, refer to the repository's documentation for specific instructions.
+
+Input Text: In the application interface, there should be a text input field where you can input your text for sentiment analysis.
+
+Submit Input: After entering your text, submit it through the appropriate button or interface element provided by the application.
+
+View Results: The application should provide you with the sentiment analysis results, indicating whether the input text is negative, neutral, or positive.
+
+That's it! You have now installed and used the sentiment analysis model from the GitHub repository. Make sure to follow any specific instructions provided in the repository's documentation for a smoother experience.
