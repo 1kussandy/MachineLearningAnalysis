@@ -1,5 +1,6 @@
-#Step-by-Step Guide to Installing and Using the Sentiment Analysis Model
+GitHub Pages is primarily designed for hosting static websites, so it doesn't support server-side scripting . Thats Why Here is:
 
+#Step-by-Step Guide to Installing and Using the Sentiment Analysis Model
 
 Install Python: Begin by installing Python, the programming language required to run the sentiment analysis model. You can download Python from the official website: Python Downloads.
 
