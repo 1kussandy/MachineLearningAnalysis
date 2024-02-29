@@ -41,10 +41,6 @@ def split_dataset(X, y, test_size=0.2, validation_size=0.25):
     return X_train, X_val, X_test, y_train, y_val, y_test
 
 
-
-
-
-
 def main():
     file_path = 'Twitter_Data.csv' 
     data = load_data(file_path)
